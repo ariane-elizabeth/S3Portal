@@ -1,0 +1,40 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>S3 Portal</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span> S3 Portal</h1>
+
+        <p></p>
+
+        <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+
+         <form class="login" method="POST" action="/login">
+            <h2>Login</h2>
+            <input type="text" name="username" class="username" placeholder="username">
+            <input type="password" name="password" class="password" placeholder="password">
+            <input type="submit" value="Login">
+          </form>
+
+          <p></p>
+          <p></p>
+
+    <p>Need an account? <a href="/signup">Request here</a></p>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "easy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.125.0",
+    "body-parser": "^1.18.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-fileupload": "^0.2.0",
+    "express-session": "^1.15.6",
+    "knex": "^0.13.0",
+    "mysql": "^2.14.1",
+    "sendmail": "^1.2.0"
+  }
+}

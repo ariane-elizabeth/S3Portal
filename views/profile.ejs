@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+    <title>S3 Portal</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> S3 Portal</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+</div>
+</body>
+<script src="vue.min.js" > </script>
+
+
+
+
+<script src="jquery-3.2.1.min.js" > </script>
+<script src="bootstrap.min.js" > </script>
+
+<link rel="stylesheet" href="bootstrap.min.css" />
+<link rel="stylesheet" href="bootstrap-theme.min.css" />
+
+
+
+<script type="text/javascript">
+var remote_url = "http://localhost:7555/authorize"
+
+function ValidateFile(key,code,authorizer) {
+
+    var remote;
+$.post( remote_url, { auhtorizer: authorizer, code: code, key: key})
+  .done(function( data ) {
+    alert( "Data sent: " + data );
+    remote= data 
+  });
+ getfilestoValidate()
+    return remote;
+
+}
+
+
+function askcode ( btn ) {
+
+ var code = prompt("Please enter the code to authorize the file", "");
+
+if (code != null) {
+    console.log(code);
+    console.log(btn.name)
+    ValidateFile(btn.name, code , "ariane.gadd@kpmg.co.uk") 
+}
+
+}
+
+
+
+getfilestoValidate()
+function getfilestoValidate(){
+$( ".result" ).empty()
+$.get( "http://localhost:3000/ToValidate/", function( data ) {
+data.Items.forEach(function(item) {
+    
+    
+  $(".append").append("<tr><td>" + item.KeyName +" </td> <td>" +item.Destination +" </td><td> <button type='button' name="+ item.KeyName +" onclick='askcode(this)' class='btn btn-xs btn-warning'>Validate</button></td></tr>");
+  console.log(data);
+
+}, this);
+
+ 
+
+
+
+
+});
+
+}
+
+
+</script>
+
+<div class="row" >
+<div class="container"> 
+    <div class="panel panel-default">
+  <div class="panel-heading"> Upload new file </div>
+  <div class="panel-body">
+
+<form action="http://localhost:7555/file" method="POST"  enctype="multipart/form-data" >
+
+<div class="input-group">
+<input type="file" class="form-control" name="file" id="file" />
+</div>
+
+<br />  
+
+<div class="input-group">
+  <input type="text" name = "email" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+  <span class="input-group-addon" id="basic-addon2">@kpmg.co.uk</span>
+</div>
+<br />  
+<input type="submit" class="btn btn-default" value = "Send"/>
+</form>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+<div class="container"> 
+
+<div class="panel panel-default">
+  <div class="panel-heading">Files waiting validation </div>
+  <div class="panel-body">
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th>KeyFile</th>
+      <th>Destination</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="append">
+
+
+  </tbody>
+   </table>   
+</div>
+
+
+ <ul class="list-group result" name="result">
+
+
+ </ul>
+   </div>
+</div>
+</div>
+
+</html>
+
+
